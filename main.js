@@ -127,10 +127,13 @@ else
 			let c = new t.Color();
 			c.setHSL(i * .1, 1.0, .5);
 
-			let s = 100 + i * 50;
-			let cube = new t.Mesh(new t.BoxGeometry(s, s, s), new t.MeshBasicMaterial({color: c , wireframe: true}));
+			let s = 100;
+			let cube = new t.Mesh(new t.BoxGeometry(s, s, s), new t.MeshBasicMaterial({ map: THREE.ImageUtils.loadTexture('/sillies/' + i + '.png')}));
 			cube.position.x = win.shape.x + (win.shape.w * .5);
 			cube.position.y = win.shape.y + (win.shape.h * .5);
+			cube.material.depthTest = false;
+			cube.material.transparent = true;
+			cube.renderOrder = i / 10;
 
 			world.add(cube);
 			cubes.push(cube);
